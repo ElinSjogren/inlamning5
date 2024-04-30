@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { openDB } from 'idb';
 import styles from './page.module.css';
 import { initDatabase } from './data';
+import MediaLinks from '../../components/media/page'
 
 function Database() {
   const [userData, setUserData] = useState([]);
@@ -170,7 +171,7 @@ function Database() {
       <div>
         <button onClick={() => handleEdit(item.id)} className={styles.editButton}>Edit</button>
         <button onClick={() => handleDelete(item.id)} className={styles.deleteButton}>Delete</button>
-        
+        <br/><br/><MediaLinks event={item} />
       </div>
      </div>
   ))}
