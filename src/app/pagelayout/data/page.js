@@ -29,7 +29,6 @@ function Database() {
   useEffect(() => {
     console.log("Database component mounted");
     
-    // Anropa initDatabase-funktionen med en callback-funktion som uppdaterar state
     initDatabase((initialData) => {
       setUserData(initialData);
     });
@@ -116,7 +115,8 @@ function Database() {
       {/* <p><strong>id:</strong> {item.id}</p> */}
       <p><strong>Artist:</strong> {item.artist}</p>
       <p><strong>Description:</strong> {item.description}</p>
-      <p><strong>Date:</strong> {item.date}</p>
+      <p><strong>Date:</strong> {new Date(item.date).toLocaleDateString()}</p>
+      <p><strong>Time:</strong> {new Date(item.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
       <p><strong>Price:</strong> {item.price}</p>
       <p><strong>City:</strong> {item.city}</p>
       <p><strong>Adress:</strong> {item.address}</p>

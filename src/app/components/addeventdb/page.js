@@ -77,12 +77,11 @@ function AddEvent({ onAddEvent }) {
   };
 
   const handleDateChange = (date) => {
-    // Formatera det valda datumet till ISO 8601-format utan tidsinformation
-    const formattedDate = date.toISOString().split('T')[0];
-    // Uppdatera newEvent-objektet med det formaterade datumet
+    const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
+    const formattedDate = localDate.toISOString();
     setNewEvent({ ...newEvent, date: formattedDate });
-  };
-  
+};
+
   return (
     <div style={{ backgroundColor: '#f97316', padding: '20px', borderRadius: '10px', color: 'white', margin:'20px'}}>
 
@@ -108,7 +107,13 @@ function AddEvent({ onAddEvent }) {
 <label htmlFor="date" className={styles.pFont}>Date:</label><br />
 <DatePicker
   id="date"
-  selected={newEvent.date ? new Date(newEvent.date) : null} // Använd null om newEvent.date är tomt
+  selected={newEvent.date ? new Date(newEvent.date) : null}
+  dateFormat="Pp"
+  showTimeSelect
+  timeFormat="HH:mm"
+  minDate={new Date()}
+  showYearDropdown
+  scrollableMonthYearDropdown
   onChange={handleDateChange}
   className={styles.inputField}
 />
