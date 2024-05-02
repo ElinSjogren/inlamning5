@@ -22,7 +22,13 @@ function AddEvent({ onAddEvent }) {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setNewEvent({ ...newEvent, [name]: value });
+  
+    if (name === 'spotifyEmbed') {
+      const convertedEmbed = convertEmbedCode(value); // Konvertera embed-koden
+      setNewEvent({ ...newEvent, [name]: convertedEmbed }); // Uppdatera newEvent med den konverterade embed-koden
+    } else {
+      setNewEvent({ ...newEvent, [name]: value }); // Uppdatera newEvent med det nya värdet
+    }
   };
 
   const handleDateChange = (date) => {
