@@ -4,6 +4,7 @@ import styles from '../../pagelayout/data/page.module.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import additionalStyles from './customdatepicker.css';
+import { convertEmbedCode } from './functions/convertcode';
 
 function AddEvent({ onAddEvent }) {
   const [newEvent, setNewEvent] = useState({
@@ -12,7 +13,8 @@ function AddEvent({ onAddEvent }) {
     date: '',
     price: '',
     city: '',
-    address: ''
+    address: '',
+    spotifyEmbed: '',
   });
 
   const handleInputChange = (event) => {
@@ -23,7 +25,9 @@ function AddEvent({ onAddEvent }) {
   const handleAddEvent = () => {
     const dbPromise = indexedDB.open("test-event", 1); // Öppna databasen
 
-    const { artist, description, date, price, city, address } = newEvent;
+    const { artist, description, date, price, city, address, spotifyEmbed, spotifyLink } = newEvent;
+
+    const convertedEmbed = convertEmbedCode(spotifyEmbed);
 
     if (artist && description && price && city && address) {
       dbPromise.onsuccess = (event) => {
@@ -44,7 +48,9 @@ function AddEvent({ onAddEvent }) {
             date: date,
             price: price,
             city: city,
-            address: address
+            address: address,
+            spotifyEmbed: convertedEmbed,
+            
           });
 
           addEventRequest.onsuccess = () => {
@@ -58,7 +64,8 @@ function AddEvent({ onAddEvent }) {
               date: '',
               price: '',
               city: '',
-              address: ''
+              address: '',
+              spotifyEmbed:'',
             });
           };
 
@@ -130,7 +137,6 @@ function AddEvent({ onAddEvent }) {
   className={styles.inputField}
 />
 </div>
-
       <label htmlFor="price" className={styles.pFont}>Price:</label><br />
       <input
         type="text"
@@ -158,6 +164,15 @@ function AddEvent({ onAddEvent }) {
         className={styles.inputField}
         onChange={handleInputChange}
       /><br />
+      <label htmlFor="spotifyEmbed" className={styles.pFont}>Spotify Embed:</label><br />
+      <textarea
+        id="spotifyEmbed"
+        name="spotifyEmbed"
+        value={newEvent.spotifyEmbed}
+        className={styles.textareaField}
+        onChange={handleInputChange}
+      /><br />
+      <br />
       <br />
       <button onClick={handleAddEvent} className={styles.addEventButton}>Add Event</button>
     </div>

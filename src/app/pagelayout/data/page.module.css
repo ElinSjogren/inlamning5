@@ -75,6 +75,23 @@
     border-color: #4B5563;
     box-shadow: 0 0 0 2px #4B5563;
   }
+  .textareaField {
+    padding: 0.5rem;
+    border: 3px solid #CCCCCC;
+    border-radius: 1.25rem;
+    font-size: 1rem;
+    color: #FFF;
+    background-color: #4B5563;
+    height: 200px; 
+    width: 200px;
+  }
+  .textareaField:focus{
+    outline: none;
+    background-color: #1F2937;
+    border-color: #4B5563;
+    box-shadow: 0 0 0 2px #4B5563;
+  }
+  
   .pFont
   {
     color: #fff;

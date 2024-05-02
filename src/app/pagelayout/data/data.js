@@ -74,7 +74,19 @@ export function initDatabase(callback) {
       "price": 300,
       "city": "Los Angeles",
       "address": "456 Music Avenue"
+    },
+    {
+      "id": 5,
+      "artist": "Miriam Bryant",
+      "description": "Ett musikfestival med olika genrer och artister.",
+      "date": "2024-06-07T16:00:00.000Z",
+      "price": 300,
+      "city": "Stavanger",
+      "address": "Vaulen",
+      "spotifyEmbed": "<iframe style='border-radius:12px' src='https://open.spotify.com/embed/artist/2zd9YxlsQvA5mkZ1NarYVQ?utm_source=generator' width='40%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+      "spotifyLink": "https://open.spotify.com/artist/2zd9YxlsQvA5mkZ1NarYVQ"
     }
+    
   ];
 
   sessionStorage.setItem("LatestEvent", "Event: Summer music festival in Los Angeles");
