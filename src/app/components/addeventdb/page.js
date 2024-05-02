@@ -29,7 +29,7 @@ function AddEvent({ onAddEvent }) {
   const handleAddEvent = () => {
     const dbPromise = indexedDB.open("test-event", 1); // Öppna databasen
 
-    const { artist, description, date, price, city, address, spotifyEmbed, spotifyLink } = newEvent;
+    const { artist, description, date, price, city, address, spotifyEmbed} = newEvent;
 
     const convertedEmbed = convertEmbedCode(spotifyEmbed);
 
