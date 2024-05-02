@@ -22,6 +22,10 @@ function AddEvent({ onAddEvent }) {
     setNewEvent({ ...newEvent, [name]: value });
   };
 
+  const handleDateChange = (date) => {
+    setNewEvent({ ...newEvent, date: date });
+  };
+
   const handleAddEvent = () => {
     const dbPromise = indexedDB.open("test-event", 1); // Öppna databasen
 
@@ -83,21 +87,6 @@ function AddEvent({ onAddEvent }) {
     }
   };
 
-  const handleDateChange = (date) => {
-    // Hämta den aktuella tidzonens offset (i minuter)
-    const localTimezoneOffset = date.getTimezoneOffset();
-
-    // Lägg till den aktuella tidzonens offset till det lokala datumet
-    const localDateWithOffset = new Date(date.getTime() + (localTimezoneOffset * 60000));
-
-    // Konvertera det justerade datumet till ISO-format
-    const formattedDate = localDateWithOffset.toISOString();
-
-    // Uppdatera newEvent med det formaterade datumet
-    setNewEvent({ ...newEvent, date: formattedDate });
-};
-
-
   return (
     <div style={{ backgroundColor: '#f97316', padding: '20px', borderRadius: '10px', color: 'white', margin:'20px'}}>
 
@@ -133,8 +122,8 @@ function AddEvent({ onAddEvent }) {
   popperPlacement="bottom"
   showYearDropdown
   scrollableMonthYearDropdown
+  className={styles.inputField} 
   onChange={handleDateChange}
-  className={styles.inputField}
 />
 </div>
       <label htmlFor="price" className={styles.pFont}>Price:</label><br />
