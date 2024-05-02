@@ -43,7 +43,7 @@ export function initDatabase(callback) {
       "id": 1,
       "artist": "John Doe Quartet",
       "description": "En kväll med jazzmusik av John Doe Quartet.",
-      "date": "2024-05-10",
+      "date": "2024-05-03T11:30:00.000Z",
       "price": 150,
       "city": "Stockholm",
       "address": "Some street address"
@@ -52,7 +52,7 @@ export function initDatabase(callback) {
       "id": 2,
       "artist": "Alice Smith Live",
       "description": "Alice Smith uppträder med sin senaste musik.",
-      "date": "2024-06-15",
+      "date": "2024-05-03T16:00:00.000Z",
       "price": 200,
       "city": "New York",
       "address": "123 Broadway"
@@ -61,7 +61,7 @@ export function initDatabase(callback) {
       "id": 3,
       "artist": "Theatre Performance: Romeo and Juliet",
       "description": "En teaterföreställning av Shakespeares klassiker.",
-      "date": "2024-07-20",
+      "date": "2024-05-03T19:00:00.000Z",
       "price": 250,
       "city": "London",
       "address": "123 Theatre Street"
@@ -70,11 +70,23 @@ export function initDatabase(callback) {
       "id": 4,
       "artist": "Summer Music Festival",
       "description": "Ett musikfestival med olika genrer och artister.",
-      "date": "2024-08-05",
+      "date": "2024-05-03T21:00:00.000Z",
       "price": 300,
       "city": "Los Angeles",
       "address": "456 Music Avenue"
+    },
+    {
+      "id": 5,
+      "artist": "Miriam Bryant",
+      "description": "Ett musikfestival med olika genrer och artister.",
+      "date": "2024-06-07T16:00:00.000Z",
+      "price": 300,
+      "city": "Stavanger",
+      "address": "Vaulen",
+      "spotifyEmbed": "<iframe style='border-radius:12px' src='https://open.spotify.com/embed/artist/2zd9YxlsQvA5mkZ1NarYVQ?utm_source=generator' width='40%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+      "spotifyLink": "https://open.spotify.com/artist/2zd9YxlsQvA5mkZ1NarYVQ"
     }
+    
   ];
 
   sessionStorage.setItem("LatestEvent", "Event: Summer music festival in Los Angeles");

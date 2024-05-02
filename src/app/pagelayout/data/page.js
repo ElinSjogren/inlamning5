@@ -4,6 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { openDB } from 'idb';
 import styles from './page.module.css';
 import { initDatabase } from './data';
+import MediaLinks from '../../components/media/page'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import additionalStyles from './../../components/addeventdb/customdatepicker.css';
+import { convertEmbedCode } from '@/app/components/addeventdb/functions/convertcode';
 
 function Database() {
   const [userData, setUserData] = useState([]);
@@ -14,7 +19,8 @@ function Database() {
     date: '',
     price: '',
     city: '',
-    address: ''
+    address: '',
+    spotifyEmbed: ''
   });
 
   const fetchLatestData = async () => {
@@ -28,7 +34,6 @@ function Database() {
   useEffect(() => {
     console.log("Database component mounted");
     
-    // Anropa initDatabase-funktionen med en callback-funktion som uppdaterar state
     initDatabase((initialData) => {
       setUserData(initialData);
     });
@@ -53,6 +58,8 @@ function Database() {
       
       const tx = db.transaction("userData", "readwrite");
       const store = tx.objectStore("userData");
+      const convertedEmbed = convertEmbedCode(editData.spotifyEmbed);
+      setEditData({ ...editData, spotifyEmbed: convertedEmbed });
       
       await store.put(editData);
   
@@ -76,7 +83,8 @@ function Database() {
         date: '',
         price: '',
         city: '',
-        address: ''
+        address: '',
+        spotifyEmbed:'',
       });
       
       console.log("Item updated successfully.");
@@ -106,19 +114,24 @@ function Database() {
       console.error('Error deleting item from IndexedDB:', error);
     }
   };
-
+  useEffect(() => {
+    console.log("Initial Spotify embed value:", editData.spotifyEmbed);
+  }, []);
   return (
     <div style={{borderBottom:'5px solid black'}}>
      <div>
       {userData.map((item) => (
       <div key={item.id} style={{ backgroundColor: '#f97316', padding: '20px', borderRadius: '10px', color: 'white', margin:'20px'}}>
-      {/* <p><strong>id:</strong> {item.id}</p> */}
       <p><strong>Artist:</strong> {item.artist}</p>
       <p><strong>Description:</strong> {item.description}</p>
-      <p><strong>Date:</strong> {item.date}</p>
+      <p><strong>Date:</strong> {new Date(item.date).toLocaleDateString()}</p>
+      <p><strong>Time:</strong> {new Date(item.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
       <p><strong>Price:</strong> {item.price}</p>
       <p><strong>City:</strong> {item.city}</p>
       <p><strong>Adress:</strong> {item.address}</p>
+      <p><strong>Spotify Embed:</strong><br/>
+      <div dangerouslySetInnerHTML={{ __html: item.spotifyEmbed }} />
+      </p>
       <hr/>
       {editId === item.id && (
         <div style={{color:'black'}}>
@@ -136,13 +149,21 @@ function Database() {
             value={editData.description}
             onChange={(e) => setEditData({...editData, description: e.target.value})}
           />
-          <p className={styles.pFont}>Date:</p>
-          <input
-            type="date"
-            className={styles.inputField}
-            value={editData.date}
-            onChange={(e) => setEditData({...editData, date: e.target.value})}
-          />
+<p className={styles.pFont}>Date:</p>
+<DatePicker
+  wrapperClassName="datePicker"
+  id="date"
+  selected={editData.date ? new Date(editData.date) : null} 
+  dateFormat="dd/MM/yyyy HH:mm" 
+  showTimeSelect 
+  timeFormat="HH:mm" 
+  minDate={new Date()} 
+  popperPlacement="bottom"
+  showYearDropdown 
+  scrollableMonthYearDropdown 
+  onChange={(date) => setEditData({ ...editData, date })} 
+  className={styles.inputField} 
+/>
           <p className={styles.pFont}>Price:</p>
           <input
             type="text"
@@ -163,14 +184,22 @@ function Database() {
             value={editData.address}
             className={styles.inputField}
             onChange={(e) => setEditData({...editData, address: e.target.value})}
-          /><br/>
+          />
+
+<p className={styles.pFont}>Spotify Embed:</p>
+<textarea
+  value={editData.spotifyEmbed}
+  className={styles.textareaField}
+  onChange={(e) => setEditData({...editData, spotifyEmbed: e.target.value})}
+/>
+          <br/>
           <button onClick={handleUpdate} className={styles.updateButton}>Update</button>
         </div>
       )}
       <div>
         <button onClick={() => handleEdit(item.id)} className={styles.editButton}>Edit</button>
         <button onClick={() => handleDelete(item.id)} className={styles.deleteButton}>Delete</button>
-        
+        <br/><br/><MediaLinks event={item} />
       </div>
      </div>
   ))}

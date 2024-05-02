@@ -1,6 +1,10 @@
 'use client'
 import React, { useState } from 'react';
 import styles from '../../pagelayout/data/page.module.css'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import additionalStyles from './customdatepicker.css';
+import { convertEmbedCode } from './functions/convertcode';
 
 function AddEvent({ onAddEvent }) {
   const [newEvent, setNewEvent] = useState({
@@ -9,7 +13,8 @@ function AddEvent({ onAddEvent }) {
     date: '',
     price: '',
     city: '',
-    address: ''
+    address: '',
+    spotifyEmbed: '',
   });
 
   const handleInputChange = (event) => {
@@ -20,9 +25,11 @@ function AddEvent({ onAddEvent }) {
   const handleAddEvent = () => {
     const dbPromise = indexedDB.open("test-event", 1); // Öppna databasen
 
-    const { artist, description, date, price, city, address } = newEvent;
+    const { artist, description, date, price, city, address, spotifyEmbed, spotifyLink } = newEvent;
 
-    if (artist && description && date && price && city && address) {
+    const convertedEmbed = convertEmbedCode(spotifyEmbed);
+
+    if (artist && description && price && city && address) {
       dbPromise.onsuccess = (event) => {
         const db = event.target.result;
         const tx = db.transaction("userData", "readwrite");
@@ -41,7 +48,9 @@ function AddEvent({ onAddEvent }) {
             date: date,
             price: price,
             city: city,
-            address: address
+            address: address,
+            spotifyEmbed: convertedEmbed,
+            
           });
 
           addEventRequest.onsuccess = () => {
@@ -55,7 +64,8 @@ function AddEvent({ onAddEvent }) {
               date: '',
               price: '',
               city: '',
-              address: ''
+              address: '',
+              spotifyEmbed:'',
             });
           };
 
@@ -72,6 +82,21 @@ function AddEvent({ onAddEvent }) {
       alert('Please fill in all fields before adding a new event.');
     }
   };
+
+  const handleDateChange = (date) => {
+    // Hämta den aktuella tidzonens offset (i minuter)
+    const localTimezoneOffset = date.getTimezoneOffset();
+
+    // Lägg till den aktuella tidzonens offset till det lokala datumet
+    const localDateWithOffset = new Date(date.getTime() + (localTimezoneOffset * 60000));
+
+    // Konvertera det justerade datumet till ISO-format
+    const formattedDate = localDateWithOffset.toISOString();
+
+    // Uppdatera newEvent med det formaterade datumet
+    setNewEvent({ ...newEvent, date: formattedDate });
+};
+
 
   return (
     <div style={{ backgroundColor: '#f97316', padding: '20px', borderRadius: '10px', color: 'white', margin:'20px'}}>
@@ -95,15 +120,23 @@ function AddEvent({ onAddEvent }) {
         className={styles.inputField}
         onChange={handleInputChange}
       /><br />
-      <label htmlFor="date" className={styles.pFont}>Date:</label><br />
-      <input
-        type="date"
-        id="date"
-        name="date"
-        value={newEvent.date}
-        className={styles.inputField}
-        onChange={handleInputChange}
-      /><br />
+<label htmlFor="date" className={styles.pFont}>Date:</label><br />
+<div className="form-group">
+<DatePicker
+  wrapperClassName="datePicker" 
+  id="date"
+  selected={newEvent.date ? new Date(newEvent.date) : null}
+  dateFormat="dd/MM/yyyy HH:mm"
+  showTimeSelect
+  timeFormat="HH:mm"
+  minDate={new Date()}
+  popperPlacement="bottom"
+  showYearDropdown
+  scrollableMonthYearDropdown
+  onChange={handleDateChange}
+  className={styles.inputField}
+/>
+</div>
       <label htmlFor="price" className={styles.pFont}>Price:</label><br />
       <input
         type="text"
@@ -131,6 +164,15 @@ function AddEvent({ onAddEvent }) {
         className={styles.inputField}
         onChange={handleInputChange}
       /><br />
+      <label htmlFor="spotifyEmbed" className={styles.pFont}>Spotify Embed:</label><br />
+      <textarea
+        id="spotifyEmbed"
+        name="spotifyEmbed"
+        value={newEvent.spotifyEmbed}
+        className={styles.textareaField}
+        onChange={handleInputChange}
+      /><br />
+      <br />
       <br />
       <button onClick={handleAddEvent} className={styles.addEventButton}>Add Event</button>
     </div>
