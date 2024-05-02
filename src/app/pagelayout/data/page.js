@@ -60,9 +60,13 @@ function Database() {
 
   const [selectedCountry, setSelectedCountry] = useState(editData.country);
 
-const handleCountryChange = (selectedCountry) => {
-  setSelectedCountry(selectedCountry);
-};
+  const handleCountryChange = (event) => {
+    const selectedCountry = event.target.value;
+    console.log("Selected country:", selectedCountry);
+    setSelectedCountry(selectedCountry); 
+    setEditData({ ...editData, country: selectedCountry });
+  };
+  
 
 const handleUpdate = async () => {
   console.log("Updating item with id:", editId);
@@ -214,10 +218,7 @@ const handleUpdate = async () => {
           <p className={styles.pFont}>Country:</p>
           <CountryDropdown
   value={selectedCountry}
-  onChange={(selectedCountry) => {
-    setSelectedCountry(selectedCountry); // Uppdatera selectedCountry här
-    setEditData({ ...editData, country: selectedCountry });
-  }}
+  onChange={handleCountryChange}
 />
 
 <p className={styles.pFont}>Spotify Embed:</p>
