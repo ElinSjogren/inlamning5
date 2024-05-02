@@ -84,7 +84,6 @@ export function initDatabase(callback) {
       "city": "Stavanger",
       "address": "Vaulen",
       "spotifyEmbed": "<iframe style='border-radius:12px' src='https://open.spotify.com/embed/artist/2zd9YxlsQvA5mkZ1NarYVQ?utm_source=generator' width='40%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
-      "spotifyLink": "https://open.spotify.com/artist/2zd9YxlsQvA5mkZ1NarYVQ"
     }
     
   ];
