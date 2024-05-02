@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { openDB } from 'idb';
 import styles from './page.module.css';
 import { initDatabase } from './data';
+import Image from 'next/image';
 import MediaLinks from '../../components/media/page'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -20,7 +21,9 @@ function Database() {
     price: '',
     city: '',
     address: '',
-    spotifyEmbed: ''
+    country: '',
+    spotifyEmbed: '',
+    imageURL:''
   });
 
   const fetchLatestData = async () => {
@@ -84,7 +87,9 @@ function Database() {
         price: '',
         city: '',
         address: '',
+        country: '',
         spotifyEmbed:'',
+        imageURL:'',
       });
       
       console.log("Item updated successfully.");
@@ -122,16 +127,20 @@ function Database() {
      <div>
       {userData.map((item) => (
       <div key={item.id} style={{ backgroundColor: '#f97316', padding: '20px', borderRadius: '10px', color: 'white', margin:'20px'}}>
-      <p><strong>Artist:</strong> {item.artist}</p>
+      <h1 className={styles.h1Font}>{item.artist}</h1>
+      <Image src={item.imageURL} alt={item.artist} className={styles.imageLazy} loading='lazy' width={100} height={100} />
+      <br/><hr/>
       <p><strong>Description:</strong> {item.description}</p>
       <p><strong>Date:</strong> {new Date(item.date).toLocaleDateString()}</p>
       <p><strong>Time:</strong> {new Date(item.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
       <p><strong>Price:</strong> {item.price}</p>
       <p><strong>City:</strong> {item.city}</p>
       <p><strong>Adress:</strong> {item.address}</p>
-      <p><strong>Spotify Embed:</strong><br/>
-      <div dangerouslySetInnerHTML={{ __html: item.spotifyEmbed }} />
-      </p>
+      <p><strong>Country:</strong> {item.country}</p>
+      <hr/><br/>
+      <p><strong>Spotify Embed:</strong></p><br/>
+      <div dangerouslySetInnerHTML={{ __html: item.spotifyEmbed }} className={styles.spotifyEmbed} />
+      <br/>
       <hr/>
       {editId === item.id && (
         <div style={{color:'black'}}>
@@ -141,6 +150,13 @@ function Database() {
             value={editData.artist}
             className={styles.inputField}
             onChange={(e) => setEditData({...editData, artist: e.target.value})}
+          />
+          <p className={styles.pFont}>Image URL: (https://www.last.fm (only img url allowed))</p>
+          <input
+            type="text"
+            value={editData.imageURL}
+            className={styles.inputField}
+            onChange={(e) => setEditData({...editData, imageURL: e.target.value})}
           />
           <p className={styles.pFont}>Description:</p>
           <input
@@ -185,13 +201,20 @@ function Database() {
             className={styles.inputField}
             onChange={(e) => setEditData({...editData, address: e.target.value})}
           />
+          <p className={styles.pFont}>Country:</p>
+          <input
+            type="text"
+            value={editData.country}
+            className={styles.inputField}
+            onChange={(e) => setEditData({...editData, country: e.target.value})}
+          />
 
-<p className={styles.pFont}>Spotify Embed:</p>
-<textarea
-  value={editData.spotifyEmbed}
-  className={styles.textareaField}
-  onChange={(e) => setEditData({...editData, spotifyEmbed: e.target.value})}
-/>
+          <p className={styles.pFont}>Spotify Embed:</p>
+          <textarea
+          value={editData.spotifyEmbed}
+          className={styles.textareaField}
+          onChange={(e) => setEditData({...editData, spotifyEmbed: e.target.value})}
+          />
           <br/>
           <button onClick={handleUpdate} className={styles.updateButton}>Update</button>
         </div>
