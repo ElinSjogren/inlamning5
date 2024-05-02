@@ -44,7 +44,6 @@ function AddEvent({ onAddEvent }) {
           const keys = event.target.result;
           const maxId = Math.max(...keys, 0); // Find the maximum ID
           const newId = maxId + 1;
-          sessionStorage.setItem("LatestEvent", `${artist}  having an event the ${date}`);
           const addEventRequest = userData.add({
             id: newId,
             artist: artist,
@@ -56,6 +55,7 @@ function AddEvent({ onAddEvent }) {
             spotifyEmbed: convertedEmbed,
             
           });
+          sessionStorage.setItem("LatestEvent", `${artist}  having an event the ${date}`);
 
           addEventRequest.onsuccess = () => {
             tx.oncomplete = () => {
