@@ -17,7 +17,7 @@ function AddEvent({ onAddEvent }) {
     address: '',
     country: '',
     spotifyEmbed: '',
-    imageUrl: '',
+    imageURL: '',
   });
 
   const handleInputChange = (event) => {
@@ -28,16 +28,11 @@ function AddEvent({ onAddEvent }) {
   const handleDateChange = (date) => {
     setNewEvent({ ...newEvent, date: date });
   };
-
-  const handleImageUrlChange = (event) => {
-    const { value } = event.target;
-    setNewEvent({ ...newEvent, imageUrl: value });
-  };
   
     const handleAddEvent = () => {
-    const dbPromise = indexedDB.open("test-event", 1); // Öppna databasen
+    const dbPromise = indexedDB.open("test-event", 1); 
 
-    const { artist, description, date, price, city, address, country,spotifyEmbed, imageUrl} = newEvent;
+    const { artist, description, date, price, city, address, country,spotifyEmbed, imageURL} = newEvent;
 
     const convertedEmbed = convertEmbedCode(spotifyEmbed);
 
@@ -53,6 +48,7 @@ function AddEvent({ onAddEvent }) {
           const maxId = Math.max(...keys, 0); // Find the maximum ID
           const newId = maxId + 1;
           sessionStorage.setItem("LatestEvent", `${artist}  having an event the ${date}`);
+          console.log("Image URL before adding event:", imageURL);
           const addEventRequest = userData.add({
             id: newId,
             artist: artist,
@@ -63,10 +59,10 @@ function AddEvent({ onAddEvent }) {
             address: address,
             country: country,
             spotifyEmbed: convertedEmbed,
-            imageUrl: imageUrl,
+            imageURL: imageURL,
             
           });
-
+          console.log("Image URL before adding event:", newEvent.imageURL);
           addEventRequest.onsuccess = () => {
             tx.oncomplete = () => {
               db.close();
@@ -81,7 +77,7 @@ function AddEvent({ onAddEvent }) {
               address: '',
               country: '',
               spotifyEmbed:'',
-              imageUrl:'',
+              imageURL:'',
             });
           };
 
@@ -112,14 +108,14 @@ function AddEvent({ onAddEvent }) {
         className={styles.inputField}
         onChange={handleInputChange}
       /><br />
-         <label htmlFor="imageUrl" className={styles.pFont}>Image URL: (https://www.last.fm (only img url allowed))</label><br />
+         <label htmlFor="imageURL" className={styles.pFont}>Image URL: (https://www.last.fm (only img url allowed))</label><br />
       <input 
         type="text" 
-        id="imageUrl" 
-        name="imageUrl" 
-        value={newEvent.imageUrl} 
+        id="imageURL" 
+        name="imageURL" 
+        value={newEvent.imageURL} 
         className={styles.inputField}
-        onChange={handleImageUrlChange} 
+        onChange={handleInputChange} 
       /><br/>
       <label htmlFor="description" className={styles.pFont}>Description:</label><br />
       <input
