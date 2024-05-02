@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import additionalStyles from './customdatepicker.css';
 import { convertEmbedCode } from './functions/convertcode';
+import CountryDropdown from './functions/countries';
 
 function AddEvent({ onAddEvent }) {
   const [newEvent, setNewEvent] = useState({
@@ -14,7 +15,9 @@ function AddEvent({ onAddEvent }) {
     price: '',
     city: '',
     address: '',
+    country: '',
     spotifyEmbed: '',
+    imageUrl: '',
   });
 
   const handleInputChange = (event) => {
@@ -26,14 +29,19 @@ function AddEvent({ onAddEvent }) {
     setNewEvent({ ...newEvent, date: date });
   };
 
-  const handleAddEvent = () => {
+  const handleImageUrlChange = (event) => {
+    const { value } = event.target;
+    setNewEvent({ ...newEvent, imageUrl: value });
+  };
+  
+    const handleAddEvent = () => {
     const dbPromise = indexedDB.open("test-event", 1); // Öppna databasen
 
-    const { artist, description, date, price, city, address, spotifyEmbed} = newEvent;
+    const { artist, description, date, price, city, address, country,spotifyEmbed, imageUrl} = newEvent;
 
     const convertedEmbed = convertEmbedCode(spotifyEmbed);
 
-    if (artist && description && price && city && address) {
+    if (artist && description && price && city && address && country) {
       dbPromise.onsuccess = (event) => {
         const db = event.target.result;
         const tx = db.transaction("userData", "readwrite");
@@ -53,7 +61,9 @@ function AddEvent({ onAddEvent }) {
             price: price,
             city: city,
             address: address,
+            country: country,
             spotifyEmbed: convertedEmbed,
+            imageUrl: imageUrl,
             
           });
 
@@ -69,7 +79,9 @@ function AddEvent({ onAddEvent }) {
               price: '',
               city: '',
               address: '',
+              country: '',
               spotifyEmbed:'',
+              imageUrl:'',
             });
           };
 
@@ -100,6 +112,15 @@ function AddEvent({ onAddEvent }) {
         className={styles.inputField}
         onChange={handleInputChange}
       /><br />
+         <label htmlFor="imageUrl" className={styles.pFont}>Image URL: (https://www.last.fm (only img url allowed))</label><br />
+      <input 
+        type="text" 
+        id="imageUrl" 
+        name="imageUrl" 
+        value={newEvent.imageUrl} 
+        className={styles.inputField}
+        onChange={handleImageUrlChange} 
+      /><br/>
       <label htmlFor="description" className={styles.pFont}>Description:</label><br />
       <input
         type="text"
@@ -153,6 +174,11 @@ function AddEvent({ onAddEvent }) {
         className={styles.inputField}
         onChange={handleInputChange}
       /><br />
+       <label htmlFor="country" className={styles.pFont}>Country:</label><br />
+      <CountryDropdown
+        value={newEvent.country}
+        onChange={(e) => handleInputChange({ target: { name: 'country', value: e.target.value } })}
+      /><br/>
       <label htmlFor="spotifyEmbed" className={styles.pFont}>Spotify Embed:</label><br />
       <textarea
         id="spotifyEmbed"

@@ -41,50 +41,28 @@ export function initDatabase(callback) {
   const Event_Data = [
     {
       "id": 1,
-      "artist": "John Doe Quartet",
-      "description": "En kväll med jazzmusik av John Doe Quartet.",
-      "date": "2024-05-03T11:30:00.000Z",
-      "price": 150,
-      "city": "Stockholm",
-      "address": "Some street address"
-    },
-    {
-      "id": 2,
-      "artist": "Alice Smith Live",
-      "description": "Alice Smith uppträder med sin senaste musik.",
-      "date": "2024-05-03T16:00:00.000Z",
-      "price": 200,
-      "city": "New York",
-      "address": "123 Broadway"
-    },
-    {
-      "id": 3,
-      "artist": "Theatre Performance: Romeo and Juliet",
-      "description": "En teaterföreställning av Shakespeares klassiker.",
-      "date": "2024-05-03T19:00:00.000Z",
-      "price": 250,
-      "city": "London",
-      "address": "123 Theatre Street"
-    },
-    {
-      "id": 4,
-      "artist": "Summer Music Festival",
-      "description": "Ett musikfestival med olika genrer och artister.",
-      "date": "2024-05-03T21:00:00.000Z",
-      "price": 300,
-      "city": "Los Angeles",
-      "address": "456 Music Avenue"
-    },
-    {
-      "id": 5,
       "artist": "Miriam Bryant",
       "description": "Ett musikfestival med olika genrer och artister.",
       "date": "2024-06-07T16:00:00.000Z",
       "price": 300,
       "city": "Stavanger",
       "address": "Vaulen",
+      "country": "NO",
       "spotifyEmbed": "<iframe style='border-radius:12px' src='https://open.spotify.com/embed/artist/2zd9YxlsQvA5mkZ1NarYVQ?utm_source=generator' width='40%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
-    }
+      "imageURL": "https://lastfm.freetls.fastly.net/i/u/770x0/24af08cfcaf790d68c372122edf47e18.jpg#24af08cfcaf790d68c372122edf47e18"
+    },
+    {
+      "id": 2,
+      "artist": "Atmozfears",
+      "description": "Ett musikfestival med olika genrer och artister.",
+      "date": "2024-05-17T17:00:00.000Z",
+      "price": 300,
+      "city": "Las Vegas",
+      "address": "Las Vegas Motor Speedway,7000 Las Vegas Blvd",
+      "country": "US",
+      "spotifyEmbed": "<iframe style='border-radius:12px'src='https://open.spotify.com/embed/artist/0MBGxwmCdXdO26ojaNcT64?utm_source=generator' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+      "imageURL": "https://lastfm.freetls.fastly.net/i/u/770x0/d3ba1662925a497cc955c42aaed31564.jpg#d3ba1662925a497cc955c42aaed31564"
+    },
     
   ];
 
