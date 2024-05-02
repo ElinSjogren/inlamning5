@@ -24,15 +24,25 @@ function AddEvent({ onAddEvent }) {
     const { name, value } = event.target;
   
     if (name === 'spotifyEmbed') {
-      const convertedEmbed = convertEmbedCode(value); // Konvertera embed-koden
-      setNewEvent({ ...newEvent, [name]: convertedEmbed }); // Uppdatera newEvent med den konverterade embed-koden
+      const convertedEmbed = convertEmbedCode(value); 
+      setNewEvent({ ...newEvent, [name]: convertedEmbed }); 
     } else {
-      setNewEvent({ ...newEvent, [name]: value }); // Uppdatera newEvent med det nya värdet
+      setNewEvent({ ...newEvent, [name]: value });
     }
+  };
+
+  const handleExampleClick = () => {
+    const exampleEmbed = `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/EXEMPLE_ID?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+    setNewEvent({ ...newEvent, spotifyEmbed: exampleEmbed });
   };
 
   const handleDateChange = (date) => {
     setNewEvent({ ...newEvent, date: date });
+  };
+
+  const handleExampleImageClick = () => {
+    const exampleImageURL = 'https://lastfm.freetls.fastly.net/i/u/770x0/5ff3a1f68a7144a6abcd1038673a03ed.jpg#5ff3a1f68a7144a6abcd1038673a03ed';
+    setNewEvent({ ...newEvent, imageURL: exampleImageURL });
   };
   
     const handleAddEvent = () => {
@@ -123,6 +133,7 @@ function AddEvent({ onAddEvent }) {
         className={styles.inputField}
         onChange={handleInputChange} 
       /><br/>
+      <button onClick={handleExampleImageClick} className={styles.addEventButton}>Example Image-URL</button><br/>
       <label htmlFor="description" className={styles.pFont}>Description:</label><br />
       <input
         type="text"
@@ -189,6 +200,7 @@ function AddEvent({ onAddEvent }) {
         className={styles.textareaField}
         onChange={handleInputChange}
       /><br />
+       <button onClick={handleExampleClick} className={styles.addEventButton}>Example Code</button>
       <br />
       <br />
       <button onClick={handleAddEvent} className={styles.addEventButton}>Add Event</button>
