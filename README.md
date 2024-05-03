@@ -15,22 +15,19 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-----------------
+Improvments and benefits:
+A search box on the start page with lazy-load not to slow down the speed. User can now get exactly what event they want and se the important dates directly.
+More interactive event list with help from spotify. Now user can pre-listen to the artist if the event could be intresting for them.
+Accessibility:
+Add event-page have an much more user friendly and accessible calender for picking dates. You can easely tab, use arrows and press enter and there is no need for curser.
+Semantic HTML elements for more accessibility.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+A huge challenge was to search for improvments as we go. And ofcourse bugs in the process. Late in the project we found out that out teammate could not help us with his part. There is no hard feelings but there are still som improvments yet to be done. For example aria tags implementation, we just simpley did not have time to look into that much. And we dont have pictures, that is also missing due to time limits.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
