@@ -59,7 +59,7 @@
     background-color: #4B5563;
   }
 
-.inputField {
+  .inputField, select.inputField {
     padding: 0.2rem;
     padding-left: 0.7rem;
     border: 3px solid #CCCCCC;
@@ -67,14 +67,27 @@
     font-size: 1rem;
     color: #FFF;
     background-color: #4B5563;
+    width: 80%;
   }
   
-  .inputField:focus {
-    outline: none;
-    background-color: #1F2937;
-    border-color: #4B5563;
-    box-shadow: 0 0 0 2px #4B5563;
-  }
+  .inputField:focus,
+  select.inputField:focus {
+  outline: none;
+  background-color: #1F2937;
+  border-color: #4B5563;
+  box-shadow: 0 0 0 2px #4B5563;
+}
+
+.spotifyEmbed {
+  padding: 0.5rem;
+  border: 3px solid #000000;
+  border-radius: 1.25rem;
+  font-size: 1rem;
+  color: #FFF;
+  background-color: #4B5563;
+
+}
+
   .textareaField {
     padding: 0.5rem;
     border: 3px solid #CCCCCC;
@@ -91,7 +104,13 @@
     border-color: #4B5563;
     box-shadow: 0 0 0 2px #4B5563;
   }
-  
+
+  .imageLazy {
+    width: 150px;
+    height: 150px;
+    border: 1px solid black;
+    margin-left:20px;
+  }
   .pFont
   {
     color: #fff;
