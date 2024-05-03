@@ -129,9 +129,9 @@ function Database() {
       <p><strong>Price:</strong> {item.price}</p>
       <p><strong>City:</strong> {item.city}</p>
       <p><strong>Adress:</strong> {item.address}</p>
-      <p><strong>Spotify Embed:</strong><br/>
+      <p><strong>Spotify Embed:</strong><br/></p>
       <div dangerouslySetInnerHTML={{ __html: item.spotifyEmbed }} />
-      </p>
+      
       <hr/>
       {editId === item.id && (
         <div style={{color:'black'}}>
