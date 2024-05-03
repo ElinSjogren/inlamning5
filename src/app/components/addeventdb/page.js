@@ -65,6 +65,7 @@ function AddEvent({ onAddEvent }) {
           const newId = maxId + 1;
           sessionStorage.setItem("LatestEvent", `${artist}  having an event the ${date}`);
           console.log("Image URL before adding event:", imageURL);
+          
           const addEventRequest = userData.add({
             id: newId,
             artist: artist,
@@ -78,7 +79,11 @@ function AddEvent({ onAddEvent }) {
             imageURL: imageURL,
             
           });
+
           console.log("Image URL before adding event:", newEvent.imageURL);
+
+          sessionStorage.setItem("LatestEvent", `${artist}  having an event the ${date}`);
+
           addEventRequest.onsuccess = () => {
             tx.oncomplete = () => {
               db.close();

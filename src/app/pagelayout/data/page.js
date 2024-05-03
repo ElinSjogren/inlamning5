@@ -150,11 +150,13 @@ const handleUpdate = async () => {
       <p><strong>Price:</strong> {item.price}</p>
       <p><strong>City:</strong> {item.city}</p>
       <p><strong>Adress:</strong> {item.address}</p>
+
       <p><strong>Country:</strong> {item.country}</p>
       <hr/><br/>
       <p><strong>Spotify Embed:</strong></p><br/>
       <div dangerouslySetInnerHTML={{ __html: item.spotifyEmbed }} className={styles.spotifyEmbed} />
       <br/>
+
       <hr/>
       {editId === item.id && (
         <div style={{color:'black'}}>
