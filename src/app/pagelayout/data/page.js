@@ -1,6 +1,5 @@
 'use client'
-
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { openDB } from 'idb';
 import styles from './page.module.css';
 import { initDatabase } from './data';
@@ -10,6 +9,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import additionalStyles from './../../components/addeventdb/customdatepicker.css';
 import { convertEmbedCode } from '@/app/components/addeventdb/functions/convertcode';
+import CountryDropdown from '@/app/components/addeventdb/functions/countries';
 
 function Database() {
   const [userData, setUserData] = useState([]);
@@ -44,6 +44,11 @@ function Database() {
     fetchLatestData();
   }, []);
 
+  useEffect(() => {
+    const convertedEmbed = convertEmbedCode(editData.spotifyEmbed);
+    setEditData({ ...editData, spotifyEmbed: convertedEmbed });
+  }, [editData.spotifyEmbed]);
+  
   console.log(userData);
 
   const handleEdit = (id) => {
@@ -53,50 +58,59 @@ function Database() {
     setEditData(editItem);
   };
 
-  const handleUpdate = async () => {
-    console.log("Updating item with id:", editId);
-    
-    try {
+  const [selectedCountry, setSelectedCountry] = useState(editData.country);
+
+  const handleCountryChange = (event) => {
+    const selectedCountry = event.target.value;
+    console.log("Selected country:", selectedCountry);
+    setSelectedCountry(selectedCountry); 
+    setEditData({ ...editData, country: selectedCountry });
+  };
+  
+
+const handleUpdate = async () => {
+  console.log("Updating item with id:", editId);
+  
+  try {
       const db = await openDB("test-event", 1);
       
       const tx = db.transaction("userData", "readwrite");
       const store = tx.objectStore("userData");
-      const convertedEmbed = convertEmbedCode(editData.spotifyEmbed);
-      setEditData({ ...editData, spotifyEmbed: convertedEmbed });
       
-      await store.put(editData);
-  
+      const convertedEmbed = convertEmbedCode(editData.spotifyEmbed);
+      const updatedData = { ...editData, spotifyEmbed: convertedEmbed };
+      
+      await store.put(updatedData);
+      
       await tx.done;
-  
-      const updatedData = userData.map(item => {
-        if (item.id === editId) {
-          return {
-            ...item,
-            ...editData
-          };
-        }
-        return item;
+      
+      const updatedUserData = userData.map(item => {
+          if (item.id === editId) {
+              return updatedData;
+          }
+          return item;
       });
       
-      setUserData(updatedData);
+      setUserData(updatedUserData); 
+      
       setEditId(null);
       setEditData({
-        artist: '',
-        description: '',
-        date: '',
-        price: '',
-        city: '',
-        address: '',
-        country: '',
-        spotifyEmbed:'',
-        imageURL:'',
+          artist: '',
+          description: '',
+          date: '',
+          price: '',
+          city: '',
+          address: '',
+          country: '',
+          spotifyEmbed:'',
+          imageURL:'',
       });
       
       console.log("Item updated successfully.");
-    } catch (error) {
+  } catch (error) {
       console.error("Error updating item:", error);
-    }
-  };
+  }
+};
 
   const handleDelete = async (id) => {
     console.log("Deleting item with id:", id);
@@ -204,19 +218,21 @@ function Database() {
             onChange={(e) => setEditData({...editData, address: e.target.value})}
           />
           <p className={styles.pFont}>Country:</p>
-          <input
-            type="text"
-            value={editData.country}
-            className={styles.inputField}
-            onChange={(e) => setEditData({...editData, country: e.target.value})}
-          />
+          <CountryDropdown
+  value={selectedCountry}
+  onChange={handleCountryChange}
+/>
 
-          <p className={styles.pFont}>Spotify Embed:</p>
-          <textarea
-          value={editData.spotifyEmbed}
-          className={styles.textareaField}
-          onChange={(e) => setEditData({...editData, spotifyEmbed: e.target.value})}
-          />
+<p className={styles.pFont}>Spotify Embed:</p>
+<textarea
+    value={editData.spotifyEmbed}
+    className={styles.textareaField}
+    onChange={(e) => {
+        const input = e.target.value;
+        const convertedEmbed = convertEmbedCode(input);
+        setEditData({ ...editData, spotifyEmbed: convertedEmbed });
+    }}
+/>
           <br/>
           <button onClick={handleUpdate} className={styles.updateButton}>Update</button>
         </div>

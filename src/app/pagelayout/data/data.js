@@ -48,7 +48,7 @@ export function initDatabase(callback) {
       "city": "Stavanger",
       "address": "Vaulen",
       "country": "NO",
-      "spotifyEmbed": "<iframe style='border-radius:12px' src='https://open.spotify.com/embed/artist/2zd9YxlsQvA5mkZ1NarYVQ?utm_source=generator' width='40%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+      "spotifyEmbed": "<iframe style='border-radius:12px'src='https://open.spotify.com/embed/artist/2zd9YxlsQvA5mkZ1NarYVQ?utm_source=generator' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
       "imageURL": "https://lastfm.freetls.fastly.net/i/u/770x0/24af08cfcaf790d68c372122edf47e18.jpg#24af08cfcaf790d68c372122edf47e18"
     },
     {

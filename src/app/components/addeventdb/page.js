@@ -17,27 +17,38 @@ function AddEvent({ onAddEvent }) {
     address: '',
     country: '',
     spotifyEmbed: '',
-    imageUrl: '',
+    imageURL: '',
   });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setNewEvent({ ...newEvent, [name]: value });
+  
+    if (name === 'spotifyEmbed') {
+      const convertedEmbed = convertEmbedCode(value); 
+      setNewEvent({ ...newEvent, [name]: convertedEmbed }); 
+    } else {
+      setNewEvent({ ...newEvent, [name]: value });
+    }
+  };
+
+  const handleExampleClick = () => {
+    const exampleEmbed = `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/EXEMPLE_ID?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+    setNewEvent({ ...newEvent, spotifyEmbed: exampleEmbed });
   };
 
   const handleDateChange = (date) => {
     setNewEvent({ ...newEvent, date: date });
   };
 
-  const handleImageUrlChange = (event) => {
-    const { value } = event.target;
-    setNewEvent({ ...newEvent, imageUrl: value });
+  const handleExampleImageClick = () => {
+    const exampleImageURL = 'https://lastfm.freetls.fastly.net/i/u/770x0/5ff3a1f68a7144a6abcd1038673a03ed.jpg#5ff3a1f68a7144a6abcd1038673a03ed';
+    setNewEvent({ ...newEvent, imageURL: exampleImageURL });
   };
   
     const handleAddEvent = () => {
-    const dbPromise = indexedDB.open("test-event", 1); // Öppna databasen
+    const dbPromise = indexedDB.open("test-event", 1); 
 
-    const { artist, description, date, price, city, address, country,spotifyEmbed, imageUrl} = newEvent;
+    const { artist, description, date, price, city, address, country,spotifyEmbed, imageURL} = newEvent;
 
     const convertedEmbed = convertEmbedCode(spotifyEmbed);
 
@@ -52,6 +63,9 @@ function AddEvent({ onAddEvent }) {
           const keys = event.target.result;
           const maxId = Math.max(...keys, 0); // Find the maximum ID
           const newId = maxId + 1;
+          sessionStorage.setItem("LatestEvent", `${artist}  having an event the ${date}`);
+          console.log("Image URL before adding event:", imageURL);
+          
           const addEventRequest = userData.add({
             id: newId,
             artist: artist,
@@ -62,9 +76,12 @@ function AddEvent({ onAddEvent }) {
             address: address,
             country: country,
             spotifyEmbed: convertedEmbed,
-            imageUrl: imageUrl,
+            imageURL: imageURL,
             
           });
+
+          console.log("Image URL before adding event:", newEvent.imageURL);
+
           sessionStorage.setItem("LatestEvent", `${artist}  having an event the ${date}`);
 
           addEventRequest.onsuccess = () => {
@@ -81,7 +98,7 @@ function AddEvent({ onAddEvent }) {
               address: '',
               country: '',
               spotifyEmbed:'',
-              imageUrl:'',
+              imageURL:'',
             });
           };
 
@@ -112,15 +129,16 @@ function AddEvent({ onAddEvent }) {
         className={styles.inputField}
         onChange={handleInputChange}
       /><br />
-         <label htmlFor="imageUrl" className={styles.pFont}>Image URL: (https://www.last.fm (only img url allowed))</label><br />
+         <label htmlFor="imageURL" className={styles.pFont}>Image URL: (https://www.last.fm (only img url allowed))</label><br />
       <input 
         type="text" 
-        id="imageUrl" 
-        name="imageUrl" 
-        value={newEvent.imageUrl} 
+        id="imageURL" 
+        name="imageURL" 
+        value={newEvent.imageURL} 
         className={styles.inputField}
-        onChange={handleImageUrlChange} 
+        onChange={handleInputChange} 
       /><br/>
+      <button onClick={handleExampleImageClick} className={styles.addEventButton}>Example Image-URL</button><br/>
       <label htmlFor="description" className={styles.pFont}>Description:</label><br />
       <input
         type="text"
@@ -187,6 +205,7 @@ function AddEvent({ onAddEvent }) {
         className={styles.textareaField}
         onChange={handleInputChange}
       /><br />
+       <button onClick={handleExampleClick} className={styles.addEventButton}>Example Code</button>
       <br />
       <br />
       <button onClick={handleAddEvent} className={styles.addEventButton}>Add Event</button>
