@@ -63,10 +63,44 @@ export function initDatabase(callback) {
       "spotifyEmbed": "<iframe style='border-radius:12px'src='https://open.spotify.com/embed/artist/0MBGxwmCdXdO26ojaNcT64?utm_source=generator' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
       "imageURL": "https://lastfm.freetls.fastly.net/i/u/770x0/d3ba1662925a497cc955c42aaed31564.jpg#d3ba1662925a497cc955c42aaed31564"
     },
+    {
+      "id": 3,
+      "artist": "Fröken Snusk",
+      "description": "Ett musikfestival med olika genrer och artister.",
+      "date": "2024-08-31T20:00:00.000Z",
+      "price": 299,
+      "city": "Furuvik",
+      "address": "Furuviksparken",
+      "country": "SE",
+      "spotifyEmbed": "<iframe style='border-radius:12px' src='https://open.spotify.com/embed/artist/6RjsbK9T7d1UQD1PFEYYGt?utm_source=generator' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+      "imageURL": "https://lastfm.freetls.fastly.net/i/u/770x0/6b44f0bad3898288c3cfd1b526c25fa7.jpg#6b44f0bad3898288c3cfd1b526c25fa7"
+    },
+    {
+      "id": 4,
+      "artist": "Armin Van Buuren (Escapade 2024)",
+      "description": "Ett musikfestival med olika genrer och artister.",
+      "date": "2024-06-23T15:00:00.000Z",
+      "price": 700,
+      "city": "Ottawa",
+      "address": "Lansdowne Park",
+      "country": "CA",
+      "spotifyEmbed": "<iframe style='border-radius:12px' src='https://open.spotify.com/embed/artist/0SfsnGyD8FpIN4U4WCkBZ5?utm_source=generator' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+      "imageURL": "https://lastfm.freetls.fastly.net/i/u/770x0/ac74385a78324f4ab46e39b37295f5aa.jpg#ac74385a78324f4ab46e39b37295f5aa"
+    },
+    {
+      "id": 5,
+      "artist": "Aly & Fila",
+      "description": "Ett musikfestival med olika genrer och artister.",
+      "date": "2024-09-05T11:55:00.000Z",
+      "price": 450,
+      "city": "Ibiza",
+      "address": "Eden Park",
+      "country": "ES",
+      "spotifyEmbed": "<iframe style='border-radius:12px' src='https://open.spotify.com/embed/artist/2hL1EouqXLtBEB6JKnPF0h?utm_source=generator' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+      "imageURL": "https://lastfm.freetls.fastly.net/i/u/770x0/b10e8dcd0d3f4178a276859a63ec8bfb.jpg#b10e8dcd0d3f4178a276859a63ec8bfb"
+    }
     
   ];
-
-  sessionStorage.setItem("LatestEvent", "Event: Summer music festival in Los Angeles");
 
   request.onsuccess = function () {
     console.log("IndexedDB opened successfully");

@@ -7,7 +7,7 @@ export function Logo() {
     alt="Icon"
   />&nbsp;
   <p style={{ 
-    color: "#FFD700",
+    color: "white",
     fontSize:"2rem",
     fontWeight:"bolder"
   }}>Q</p>
@@ -17,7 +17,7 @@ export function Logo() {
     fontWeight:"bolder"
   }}>uantum</p>
   <p style={{ 
-    color: "#FFD700",
+    color: "white",
     fontSize:"2rem",
     fontWeight:"bolder"
   }}>E</p>
