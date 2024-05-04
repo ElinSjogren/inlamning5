@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { openDB } from 'idb';
 import styles from './page.module.css';
 import { initDatabase } from './data';
-import Image from 'next/image';
 import MediaLinks from '../../components/media/page';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import CountryDropdown from '@/app/components/addeventdb/functions/countries';
 import { convertEmbedCode } from '@/app/components/addeventdb/functions/convertcode';
+import dynamic from 'next/dynamic';
+
+const LazyImage = dynamic(() => import('next/image'));
 
 function Database() {
   const [userData, setUserData] = useState([]);
@@ -142,9 +144,7 @@ function Database() {
         {userData.map((item) => (
           <div key={item.id} style={{ backgroundColor: '#f97316', padding: '20px', borderRadius: '10px', color: 'white', margin: '20px' }}>
             <h1 className={styles.h1Font}>{item.artist}</h1>
-            <Image src={item.imageURL} alt={item.artist} className={styles.imageLazy} loading='lazy' width={100} height={100} />
-            <br /><hr />
-            <p><strong>Description:</strong> {item.description}</p>
+            <LazyImage src={item.imageURL} alt={item.artist} className={styles.imageLazy} loading='lazy' width={100} height={100} />            <p><strong>Description:</strong> {item.description}</p>
             <p><strong>Date:</strong> {new Date(item.date).toLocaleDateString()}</p>
             <p><strong>Time:</strong> {new Date(item.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
             <p><strong>Price:</strong> {item.price}</p>
