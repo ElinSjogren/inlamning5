@@ -52,7 +52,7 @@ function AddEvent({ onAddEvent }) {
 
     const convertedEmbed = convertEmbedCode(spotifyEmbed);
 
-    if (artist && description && price && city && address && country) {
+    if (artist && description && city && address && country) {
       dbPromise.onsuccess = (event) => {
         const db = event.target.result;
         const tx = db.transaction("userData", "readwrite");
