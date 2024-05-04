@@ -82,8 +82,6 @@ function AddEvent({ onAddEvent }) {
 
           console.log("Image URL before adding event:", newEvent.imageURL);
 
-          sessionStorage.setItem("LatestEvent", `${artist}  having an event the ${date}`);
-
           addEventRequest.onsuccess = () => {
             tx.oncomplete = () => {
               db.close();
