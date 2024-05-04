@@ -42,6 +42,7 @@ const Search = () => {
         placeholder="Search Artist..."
         value={inputVal}
         onChange={(e) => setInputVal(e.target.value)}
+        aria-label="Search Artist"
       />
       <div className={styles.searchResult}>
         <ul>

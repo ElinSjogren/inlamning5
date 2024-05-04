@@ -33,11 +33,12 @@ export default function Home() {
 
   return (
     <>
+     <Suspense fallback={<div>Loading...</div>}>
       <div>
         <p className={styles.pFont}>Latest Event added:<br/> {latestEvent}</p>
-        <Suspense fallback={<div>Loading...</div>}></Suspense>
         <SearchLazy/>
       </div>
+      </Suspense>
     </>
   );
 }
