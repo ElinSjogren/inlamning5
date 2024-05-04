@@ -13,4 +13,4 @@ export async function setLatestEventToSession() {
     const eventDate = new Date(latestEvent.date);
     const formattedDate = eventDate.toLocaleDateString();
 
- sessionStorage.setItem("LatestEvent", `Event: ${latestEvent.artist} in ${latestEvent.city} ${formattedDate}`);}
+ sessionStorage.setItem("LatestEvent", `${latestEvent.artist} in ${latestEvent.city} ${formattedDate}`);}

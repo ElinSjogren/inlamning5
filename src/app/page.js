@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <>
       <div>
-        <p className={styles.pFont}>Veckans tips:<br/> {latestEvent}</p>
+        <p className={styles.pFont}>Latest Event added:<br/> {latestEvent}</p>
         <SearchLazy/>
       </div>
     </>
