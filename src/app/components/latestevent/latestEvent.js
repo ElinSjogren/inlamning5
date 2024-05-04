@@ -1,1 +1,0 @@
-const latestEventAdded = sessionStorage.getItem("latestEvent")

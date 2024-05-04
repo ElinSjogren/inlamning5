@@ -2,7 +2,7 @@
 import { lazy } from 'react';
 const SearchLazy = lazy(() => import('./components/SearchArtist/Search'));
 import styles from './pagelayout/data/page.module.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,Suspense } from 'react';
 import { setLatestEventToSession } from './components/sessionstorage/session';
 
 export default function Home() {
@@ -35,6 +35,7 @@ export default function Home() {
     <>
       <div>
         <p className={styles.pFont}>Latest Event added:<br/> {latestEvent}</p>
+        <Suspense fallback={<div>Loading...</div>}></Suspense>
         <SearchLazy/>
       </div>
     </>
