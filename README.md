@@ -32,7 +32,7 @@ Date-picker is used for a better calender for the user.
 Also used a countries npm import for dropdown for countries for adding an event.
 Aria-labels is used in the few places we have input fields I guess sums it up.
 Semantic HTML is kinda used, not everywhere but "Tab" works great with everything on the page.
-We used IndexedDB for storing both our hardcoded events and also the users added events. Show events is gathering that information from indexedDB.¨
+We used IndexedDB for storing both our hardcoded events and also the users added events. Show events is gathering that information from indexedDB.
 SessionStorage we used to show the user on the front page what the latest added event is.
 
 Overall:
