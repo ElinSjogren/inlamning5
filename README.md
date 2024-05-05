@@ -32,6 +32,8 @@ Date-picker is used for a better calender for the user.
 Also used a countries npm import for dropdown for countries for adding an event.
 Aria-labels is used in the few places we have input fields I guess sums it up.
 Semantic HTML is kinda used, not everywhere but "Tab" works great with everything on the page.
+We used IndexedDB for storing both our hardcoded events and also the users added events. Show events is gathering that information from indexedDB.¨
+SessionStorage we used to show the user on the front page what the latest added event is.
 
 Overall:
 A huge challenge was to search for improvments as we go. And of course bugs in the process. Late in the project we found out that out teammate could not help us with his part. There is no hard feelings but there are still som improvments yet to be done. For example more aria tags implementation and refactoring of the code, split the rendering code from the more logical code that is more of technical code. Could improve the input fields to only accept the correct string/number and not some damaging code also. We could have done better of course but we feel we are satisfied with this and the design of the page. We are happy we got all things to work in the end (hopefully).
