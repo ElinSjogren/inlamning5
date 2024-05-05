@@ -42,7 +42,7 @@ export function initDatabase(callback) {
     {
       "id": 1,
       "artist": "Miriam Bryant",
-      "description": "Ett musikfestival med olika genrer och artister.",
+      "description": "Music festival with various artists and genres",
       "date": "2024-06-07T16:00:00.000Z",
       "price": 300,
       "city": "Stavanger",
@@ -54,7 +54,7 @@ export function initDatabase(callback) {
     {
       "id": 2,
       "artist": "Atmozfears",
-      "description": "Ett musikfestival med olika genrer och artister.",
+      "description": "Music festival with various artists and genres",
       "date": "2024-05-17T17:00:00.000Z",
       "price": 300,
       "city": "Las Vegas",
@@ -66,7 +66,7 @@ export function initDatabase(callback) {
     {
       "id": 3,
       "artist": "Fröken Snusk",
-      "description": "Ett musikfestival med olika genrer och artister.",
+      "description": "Music festival with various artists and genres",
       "date": "2024-08-31T20:00:00.000Z",
       "price": 299,
       "city": "Furuvik",
@@ -78,7 +78,7 @@ export function initDatabase(callback) {
     {
       "id": 4,
       "artist": "Armin Van Buuren (Escapade 2024)",
-      "description": "Ett musikfestival med olika genrer och artister.",
+      "description": "Music festival with various artists and genres",
       "date": "2024-06-23T15:00:00.000Z",
       "price": 700,
       "city": "Ottawa",
@@ -90,7 +90,7 @@ export function initDatabase(callback) {
     {
       "id": 5,
       "artist": "Aly & Fila",
-      "description": "Ett musikfestival med olika genrer och artister.",
+      "description": "Music festival with various artists and genres",
       "date": "2024-09-05T11:55:00.000Z",
       "price": 450,
       "city": "Ibiza",
